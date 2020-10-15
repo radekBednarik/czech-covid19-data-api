@@ -1,0 +1,7 @@
+{
+    "python.pythonPath": "C:\\Users\\bedna\\.virtualenvs\\covid19_api-sM0Ttt2m\\Scripts\\python.exe",
+    "python.linting.pylintEnabled": true,
+    "python.linting.prospectorEnabled": false,
+    "python.linting.enabled": true,
+    "python.linting.mypyEnabled": true
+}

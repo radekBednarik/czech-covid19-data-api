@@ -8,6 +8,7 @@ black = "*"
 requests = "*"
 mypy = "*"
 isort = "*"
+pylint = "*"
 
 [packages]
 requests = "*"
