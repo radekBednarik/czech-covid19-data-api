@@ -55,10 +55,3 @@ def get_number_of_infected(resource="/nakaza.json") -> response_data:
         response_data (Tuple[bool, Optional[Dict[str, Any]]]): status of the resource call, and data
     """
     return _get_resource(resource)
-
-
-if __name__ == "__main__":
-    (state, data) = get_number_of_infected()
-
-    if state:
-        print(data)
