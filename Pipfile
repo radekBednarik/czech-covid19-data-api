@@ -4,8 +4,16 @@ url = "https://pypi.org/simple"
 verify_ssl = true
 
 [dev-packages]
+black = "*"
+requests = "*"
+mypy = "*"
+isort = "*"
 
 [packages]
+requests = "*"
 
 [requires]
 python_version = "3.9"
+
+[pipenv]
+allow_prereleases = true
