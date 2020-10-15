@@ -33,8 +33,8 @@ def _get_resource(resource: str) -> response_data:
         return (False, None)
 
 
-def get_cumulative_tests_done(resource="/testy.json") -> response_data:
-    """Returns `dict` with cumulative data about daily COVID tests done.
+def get_number_of_tests_done(resource="/testy.json") -> response_data:
+    """Returns `dict` with data about daily COVID tests done.
 
     Args:
         resource (str, optional): API resource string. Defaults to "/testy.json".
@@ -45,8 +45,20 @@ def get_cumulative_tests_done(resource="/testy.json") -> response_data:
     return _get_resource(resource)
 
 
+def get_number_of_infected(resource="/nakaza.json") -> response_data:
+    """Returns `dict` with data about daily COVID infected people.
+
+    Args:
+        resource (str, optional): API resource string. Defaults to "nakaza.json".
+
+    Returns:
+        response_data (Tuple[bool, Optional[Dict[str, Any]]]): status of the resource call, and data
+    """
+    return _get_resource(resource)
+
+
 if __name__ == "__main__":
-    (state, data) = get_cumulative_tests_done()
+    (state, data) = get_number_of_infected()
 
     if state:
         print(data)
