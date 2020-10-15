@@ -9,6 +9,7 @@ requests = "*"
 mypy = "*"
 isort = "*"
 pylint = "*"
+pytest = "*"
 
 [packages]
 requests = "*"
