@@ -49,7 +49,33 @@ def get_number_of_infected(resource="/nakaza.json") -> response_data:
     """Returns `dict` with data about daily COVID infected people.
 
     Args:
-        resource (str, optional): API resource string. Defaults to "nakaza.json".
+        resource (str, optional): API resource string. Defaults to "/nakaza.json".
+
+    Returns:
+        response_data (Tuple[bool, Optional[Dict[str, Any]]]): status of the resource call, and data
+    """
+    return _get_resource(resource)
+
+
+def get_all_numbers(
+    resource="/nakazeni-vyleceni-umrti-testy.json",
+) -> response_data:
+    """Returns `dict` with daily data about infected, cured, died and tests done.
+
+    Args:
+        resource (str, optional): API resource string. Defaults to "/nakazeni-vyleceni-umrti-testy.json".
+
+    Returns:
+        response_data (Tuple[bool, Optional[Dict[str, Any]]]): status of the resource call, and data
+    """
+    return _get_resource(resource)
+
+
+def get_basic_overview(resource="/zakladni-prehled.json") -> response_data:
+    """Returns `dict` with summary data about situation in Czech Republic.
+
+    Args:
+        resource (str, optional): API resource string. Defaults to "/nakazeni-vyleceni-umrti-testy.json".
 
     Returns:
         response_data (Tuple[bool, Optional[Dict[str, Any]]]): status of the resource call, and data
