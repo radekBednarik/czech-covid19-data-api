@@ -19,7 +19,7 @@ def _get_resource(resource: str) -> response_:
         resource (str): API resource string
 
     Returns:
-        response_ (Tuple[bool, Optional[Dict[str, Any]]]): status of the resource call, and data
+        response_: status of the resource call, and data
     """
     try:
         response: Response = r.get(f"{main_url}{resource}")
@@ -48,7 +48,7 @@ def get_number_of_tests_done(resource="/testy.json") -> response_:
         resource (str, optional): API resource string. Defaults to "/testy.json".
 
     Returns:
-        response_ (Tuple[bool, Optional[Dict[str, Any]]]): status of the resource call, and data
+        response_: status of the resource call, and data
     """
     return _get_resource(resource)
 
@@ -60,7 +60,7 @@ def get_number_of_infected(resource="/nakaza.json") -> response_:
         resource (str, optional): API resource string. Defaults to "/nakaza.json".
 
     Returns:
-        response_ (Tuple[bool, Optional[Dict[str, Any]]]): status of the resource call, and data
+        response_: status of the resource call, and data
     """
     return _get_resource(resource)
 
@@ -74,7 +74,7 @@ def get_all_numbers(
         resource (str, optional): API resource string. Defaults to "/nakazeni-vyleceni-umrti-testy.json".
 
     Returns:
-        response_ (Tuple[bool, Optional[Dict[str, Any]]]): status of the resource call, and data
+        response_: status of the resource call, and data
     """
     return _get_resource(resource)
 
@@ -86,6 +86,6 @@ def get_basic_overview(resource="/zakladni-prehled.json") -> response_:
         resource (str, optional): API resource string. Defaults to "/nakazeni-vyleceni-umrti-testy.json".
 
     Returns:
-        response_ (Tuple[bool, Optional[Dict[str, Any]]]): status of the resource call, and data
+        response_: status of the resource call, and data
     """
     return _get_resource(resource)
