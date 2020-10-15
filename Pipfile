@@ -10,6 +10,7 @@ mypy = "*"
 isort = "*"
 pylint = "*"
 pytest = "*"
+pyhamcrest = "*"
 
 [packages]
 requests = "*"
