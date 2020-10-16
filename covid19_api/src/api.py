@@ -89,3 +89,55 @@ def get_basic_overview(resource="/zakladni-prehled.json") -> response_:
         response_: status of the resource call, and data
     """
     return _get_resource(resource)
+
+
+def get_infected_overview(
+    resource="/osoby.json",
+) -> response_:
+    """Returns `dict` with data about each confirmed infected person.
+
+    Args:
+        resource (str, optional): API resource string. Defaults to "/kraj-okres-nakazeni-vyleceni-umrti.json".
+
+    Returns:
+        response_: status of the resource call, and data
+    """
+    return _get_resource(resource)
+
+
+def get_epidemiologic_situation_overview(
+    resource="/kraj-okres-nakazeni-vyleceni-umrti.json",
+) -> response_:
+    """Returns `dict` with overview data per each Region Hygienic Authority (KHS).
+
+    Args:
+        resource (str, optional): API resource string. Defaults to "/kraj-okres-nakazeni-vyleceni-umrti.json".
+
+    Returns:
+        response_: status of the resource call, and data
+    """
+    return _get_resource(resource)
+
+
+def get_cured_overview(resource="/vyleceni.json") -> response_:
+    """Returns `dict` with data about each cured patient.
+
+    Args:
+        resource (str, optional): API resource string. Defaults to "/vyleceni.json".
+
+    Returns:
+        response_: status of the resource call, and data
+    """
+    return _get_resource(resource)
+
+
+def get_deaths_overview(resource="/umrti.json") -> response_:
+    """Returns `dict` with data about each death of the patients.
+
+    Args:
+        resource (str, optional): API resource string. Defaults to "/umrti.json".
+
+    Returns:
+        response_: status of the resource call, and data
+    """
+    return _get_resource(resource)
