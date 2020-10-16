@@ -14,7 +14,7 @@ pip install czech-covid19-data-api
 Example 1: Get data in JSON format:
 
 ```
-from czech_covid19_data_api.src import api
+from covid19_api.src import api
 
 if __name__ == "__main__":
     (status, data) = api.get_deaths_overview()
