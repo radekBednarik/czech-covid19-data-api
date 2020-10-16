@@ -6,7 +6,7 @@ API wrapper for official covid19 data. Written in Python. Data source https://on
 ## Installation
 Just use:
 ```
-pip install covid-19-api
+pip install czech-covid19-data-api
 ```
 
 ## How to use
