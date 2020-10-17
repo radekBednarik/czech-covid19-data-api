@@ -11,8 +11,6 @@ Welcome to czech-covid19-data-api's documentation!
    :caption: Contents:
 
    source/modules
-   source/covid19_api
-
 
 
 Indices and tables
