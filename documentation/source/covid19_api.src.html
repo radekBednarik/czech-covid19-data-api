@@ -1,0 +1,221 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>covid19_api.src package &#8212; czech-covid19-data-api 1.0.4 documentation</title>
+    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">czech-covid19-data-api 1.0.4 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">covid19_api.src package</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="covid19-api-src-package">
+<h1>covid19_api.src package<a class="headerlink" href="#covid19-api-src-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-covid19_api.src.api">
+<span id="covid19-api-src-api-module"></span><h2>covid19_api.src.api module<a class="headerlink" href="#module-covid19_api.src.api" title="Permalink to this headline">¶</a></h2>
+<dl class="py function">
+<dt id="covid19_api.src.api.get_all_numbers">
+<code class="sig-prename descclassname">covid19_api.src.api.</code><code class="sig-name descname">get_all_numbers</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">resource</span><span class="o">=</span><span class="default_value">'/nakazeni-vyleceni-umrti-testy.json'</span></em><span class="sig-paren">)</span> &#x2192; Tuple<span class="p">[</span>bool<span class="p">, </span>Union<span class="p">[</span>Dict<span class="p">[</span>str<span class="p">, </span>Any<span class="p">]</span><span class="p">, </span>None<span class="p">, </span>str<span class="p">]</span><span class="p">]</span><a class="reference internal" href="../_modules/covid19_api/src/api.html#get_all_numbers"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#covid19_api.src.api.get_all_numbers" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns <cite>dict</cite> with daily data about infected, cured, died and tests done.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>resource</strong> (<em>str</em><em>, </em><em>optional</em>) – API resource string. Defaults to “/nakazeni-vyleceni-umrti-testy.json”.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><em>response_</em> – status of the resource call, and data</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="covid19_api.src.api.get_basic_overview">
+<code class="sig-prename descclassname">covid19_api.src.api.</code><code class="sig-name descname">get_basic_overview</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">resource</span><span class="o">=</span><span class="default_value">'/zakladni-prehled.json'</span></em><span class="sig-paren">)</span> &#x2192; Tuple<span class="p">[</span>bool<span class="p">, </span>Union<span class="p">[</span>Dict<span class="p">[</span>str<span class="p">, </span>Any<span class="p">]</span><span class="p">, </span>None<span class="p">, </span>str<span class="p">]</span><span class="p">]</span><a class="reference internal" href="../_modules/covid19_api/src/api.html#get_basic_overview"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#covid19_api.src.api.get_basic_overview" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns <cite>dict</cite> with summary data about situation in Czech Republic.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>resource</strong> (<em>str</em><em>, </em><em>optional</em>) – API resource string. Defaults to “/nakazeni-vyleceni-umrti-testy.json”.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><em>response_</em> – status of the resource call, and data</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="covid19_api.src.api.get_cured_overview">
+<code class="sig-prename descclassname">covid19_api.src.api.</code><code class="sig-name descname">get_cured_overview</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">resource</span><span class="o">=</span><span class="default_value">'/vyleceni.json'</span></em><span class="sig-paren">)</span> &#x2192; Tuple<span class="p">[</span>bool<span class="p">, </span>Union<span class="p">[</span>Dict<span class="p">[</span>str<span class="p">, </span>Any<span class="p">]</span><span class="p">, </span>None<span class="p">, </span>str<span class="p">]</span><span class="p">]</span><a class="reference internal" href="../_modules/covid19_api/src/api.html#get_cured_overview"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#covid19_api.src.api.get_cured_overview" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns <cite>dict</cite> with data about each cured patient.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>resource</strong> (<em>str</em><em>, </em><em>optional</em>) – API resource string. Defaults to “/vyleceni.json”.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><em>response_</em> – status of the resource call, and data</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="covid19_api.src.api.get_deaths_overview">
+<code class="sig-prename descclassname">covid19_api.src.api.</code><code class="sig-name descname">get_deaths_overview</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">resource</span><span class="o">=</span><span class="default_value">'/umrti.json'</span></em><span class="sig-paren">)</span> &#x2192; Tuple<span class="p">[</span>bool<span class="p">, </span>Union<span class="p">[</span>Dict<span class="p">[</span>str<span class="p">, </span>Any<span class="p">]</span><span class="p">, </span>None<span class="p">, </span>str<span class="p">]</span><span class="p">]</span><a class="reference internal" href="../_modules/covid19_api/src/api.html#get_deaths_overview"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#covid19_api.src.api.get_deaths_overview" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns <cite>dict</cite> with data about each death of the patients.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>resource</strong> (<em>str</em><em>, </em><em>optional</em>) – API resource string. Defaults to “/umrti.json”.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><em>response_</em> – status of the resource call, and data</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="covid19_api.src.api.get_epidemiologic_situation_overview">
+<code class="sig-prename descclassname">covid19_api.src.api.</code><code class="sig-name descname">get_epidemiologic_situation_overview</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">resource</span><span class="o">=</span><span class="default_value">'/kraj-okres-nakazeni-vyleceni-umrti.json'</span></em><span class="sig-paren">)</span> &#x2192; Tuple<span class="p">[</span>bool<span class="p">, </span>Union<span class="p">[</span>Dict<span class="p">[</span>str<span class="p">, </span>Any<span class="p">]</span><span class="p">, </span>None<span class="p">, </span>str<span class="p">]</span><span class="p">]</span><a class="reference internal" href="../_modules/covid19_api/src/api.html#get_epidemiologic_situation_overview"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#covid19_api.src.api.get_epidemiologic_situation_overview" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns <cite>dict</cite> with overview data per each Region Hygienic Authority (KHS).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>resource</strong> (<em>str</em><em>, </em><em>optional</em>) – API resource string. Defaults to “/kraj-okres-nakazeni-vyleceni-umrti.json”.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><em>response_</em> – status of the resource call, and data</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="covid19_api.src.api.get_infected_overview">
+<code class="sig-prename descclassname">covid19_api.src.api.</code><code class="sig-name descname">get_infected_overview</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">resource</span><span class="o">=</span><span class="default_value">'/osoby.json'</span></em><span class="sig-paren">)</span> &#x2192; Tuple<span class="p">[</span>bool<span class="p">, </span>Union<span class="p">[</span>Dict<span class="p">[</span>str<span class="p">, </span>Any<span class="p">]</span><span class="p">, </span>None<span class="p">, </span>str<span class="p">]</span><span class="p">]</span><a class="reference internal" href="../_modules/covid19_api/src/api.html#get_infected_overview"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#covid19_api.src.api.get_infected_overview" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns <cite>dict</cite> with data about each confirmed infected person.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>resource</strong> (<em>str</em><em>, </em><em>optional</em>) – API resource string. Defaults to “/kraj-okres-nakazeni-vyleceni-umrti.json”.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><em>response_</em> – status of the resource call, and data</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="covid19_api.src.api.get_number_of_infected">
+<code class="sig-prename descclassname">covid19_api.src.api.</code><code class="sig-name descname">get_number_of_infected</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">resource</span><span class="o">=</span><span class="default_value">'/nakaza.json'</span></em><span class="sig-paren">)</span> &#x2192; Tuple<span class="p">[</span>bool<span class="p">, </span>Union<span class="p">[</span>Dict<span class="p">[</span>str<span class="p">, </span>Any<span class="p">]</span><span class="p">, </span>None<span class="p">, </span>str<span class="p">]</span><span class="p">]</span><a class="reference internal" href="../_modules/covid19_api/src/api.html#get_number_of_infected"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#covid19_api.src.api.get_number_of_infected" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns <cite>dict</cite> with data about daily COVID infected people.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>resource</strong> (<em>str</em><em>, </em><em>optional</em>) – API resource string. Defaults to “/nakaza.json”.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><em>response_</em> – status of the resource call, and data</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="covid19_api.src.api.get_number_of_tests_done">
+<code class="sig-prename descclassname">covid19_api.src.api.</code><code class="sig-name descname">get_number_of_tests_done</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">resource</span><span class="o">=</span><span class="default_value">'/testy.json'</span></em><span class="sig-paren">)</span> &#x2192; Tuple<span class="p">[</span>bool<span class="p">, </span>Union<span class="p">[</span>Dict<span class="p">[</span>str<span class="p">, </span>Any<span class="p">]</span><span class="p">, </span>None<span class="p">, </span>str<span class="p">]</span><span class="p">]</span><a class="reference internal" href="../_modules/covid19_api/src/api.html#get_number_of_tests_done"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#covid19_api.src.api.get_number_of_tests_done" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns <cite>dict</cite> with data about daily COVID tests done.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>resource</strong> (<em>str</em><em>, </em><em>optional</em>) – API resource string. Defaults to “/testy.json”.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><em>response_</em> – status of the resource call, and data</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="module-covid19_api.src">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-covid19_api.src" title="Permalink to this headline">¶</a></h2>
+</div>
+</div>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">covid19_api.src package</a><ul>
+<li><a class="reference internal" href="#submodules">Submodules</a></li>
+<li><a class="reference internal" href="#module-covid19_api.src.api">covid19_api.src.api module</a></li>
+<li><a class="reference internal" href="#module-covid19_api.src">Module contents</a></li>
+</ul>
+</li>
+</ul>
+
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/source/covid19_api.src.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">czech-covid19-data-api 1.0.4 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">covid19_api.src package</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2020, Radek &#39;bednaJedna&#39; Bednarik.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.2.1.
+    </div>
+  </body>
+</html>

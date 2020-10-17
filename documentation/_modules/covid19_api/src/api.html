@@ -1,0 +1,226 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>covid19_api.src.api &#8212; czech-covid19-data-api 1.0.4 documentation</title>
+    <link rel="stylesheet" href="../../../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    
+    <script id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+    <script src="../../../_static/jquery.js"></script>
+    <script src="../../../_static/underscore.js"></script>
+    <script src="../../../_static/doctools.js"></script>
+    <script src="../../../_static/language_data.js"></script>
+    
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">czech-covid19-data-api 1.0.4 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../index.html" accesskey="U">Module code</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">covid19_api.src.api</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for covid19_api.src.api</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">,</span> <span class="n">Union</span>
+
+<span class="kn">import</span> <span class="nn">requests</span> <span class="k">as</span> <span class="nn">r</span>
+<span class="kn">from</span> <span class="nn">requests</span> <span class="kn">import</span> <span class="n">Request</span><span class="p">,</span> <span class="n">Response</span>
+
+<span class="c1"># TYPE ALIASES:</span>
+<span class="c1"># pylint: disable=unsubscriptable-object</span>
+<span class="n">data_</span> <span class="o">=</span> <span class="n">Union</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">],</span> <span class="kc">None</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span>
+<span class="n">response_</span> <span class="o">=</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">bool</span><span class="p">,</span> <span class="n">data_</span><span class="p">]</span>
+
+<span class="c1"># CONSTANTS:</span>
+<span class="n">main_url</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;https://onemocneni-aktualne.mzcr.cz/api/v2/covid-19&quot;</span>
+
+
+<span class="k">def</span> <span class="nf">_get_resource</span><span class="p">(</span><span class="n">resource</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">response_</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;REST API resource getter.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        resource (str): API resource string</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        response_: status of the resource call, and data</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">response</span><span class="p">:</span> <span class="n">Response</span> <span class="o">=</span> <span class="n">r</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">main_url</span><span class="si">}{</span><span class="n">resource</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">response</span><span class="o">.</span><span class="n">status_code</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">200</span><span class="p">,</span> <span class="mi">201</span><span class="p">]:</span>
+
+            <span class="k">if</span> <span class="n">resource</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s2">&quot;.json&quot;</span><span class="p">):</span>
+                <span class="k">return</span> <span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">())</span>
+
+            <span class="k">if</span> <span class="n">resource</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s2">&quot;.csv&quot;</span><span class="p">):</span>
+                <span class="k">return</span> <span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="n">response</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
+
+            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;Resource can be either .json or .csv. Please check that.&quot;</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="p">(</span><span class="kc">False</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Exception in &#39;_get_resource&#39;: </span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="p">(</span><span class="kc">False</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="get_number_of_tests_done"><a class="viewcode-back" href="../../../source/covid19_api.src.html#covid19_api.src.api.get_number_of_tests_done">[docs]</a><span class="k">def</span> <span class="nf">get_number_of_tests_done</span><span class="p">(</span><span class="n">resource</span><span class="o">=</span><span class="s2">&quot;/testy.json&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">response_</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Returns `dict` with data about daily COVID tests done.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        resource (str, optional): API resource string. Defaults to &quot;/testy.json&quot;.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        response_: status of the resource call, and data</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">_get_resource</span><span class="p">(</span><span class="n">resource</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="get_number_of_infected"><a class="viewcode-back" href="../../../source/covid19_api.src.html#covid19_api.src.api.get_number_of_infected">[docs]</a><span class="k">def</span> <span class="nf">get_number_of_infected</span><span class="p">(</span><span class="n">resource</span><span class="o">=</span><span class="s2">&quot;/nakaza.json&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">response_</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Returns `dict` with data about daily COVID infected people.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        resource (str, optional): API resource string. Defaults to &quot;/nakaza.json&quot;.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        response_: status of the resource call, and data</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">_get_resource</span><span class="p">(</span><span class="n">resource</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="get_all_numbers"><a class="viewcode-back" href="../../../source/covid19_api.src.html#covid19_api.src.api.get_all_numbers">[docs]</a><span class="k">def</span> <span class="nf">get_all_numbers</span><span class="p">(</span>
+    <span class="n">resource</span><span class="o">=</span><span class="s2">&quot;/nakazeni-vyleceni-umrti-testy.json&quot;</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">response_</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Returns `dict` with daily data about infected, cured, died and tests done.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        resource (str, optional): API resource string. Defaults to &quot;/nakazeni-vyleceni-umrti-testy.json&quot;.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        response_: status of the resource call, and data</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">_get_resource</span><span class="p">(</span><span class="n">resource</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="get_basic_overview"><a class="viewcode-back" href="../../../source/covid19_api.src.html#covid19_api.src.api.get_basic_overview">[docs]</a><span class="k">def</span> <span class="nf">get_basic_overview</span><span class="p">(</span><span class="n">resource</span><span class="o">=</span><span class="s2">&quot;/zakladni-prehled.json&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">response_</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Returns `dict` with summary data about situation in Czech Republic.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        resource (str, optional): API resource string. Defaults to &quot;/nakazeni-vyleceni-umrti-testy.json&quot;.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        response_: status of the resource call, and data</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">_get_resource</span><span class="p">(</span><span class="n">resource</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="get_infected_overview"><a class="viewcode-back" href="../../../source/covid19_api.src.html#covid19_api.src.api.get_infected_overview">[docs]</a><span class="k">def</span> <span class="nf">get_infected_overview</span><span class="p">(</span>
+    <span class="n">resource</span><span class="o">=</span><span class="s2">&quot;/osoby.json&quot;</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">response_</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Returns `dict` with data about each confirmed infected person.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        resource (str, optional): API resource string. Defaults to &quot;/kraj-okres-nakazeni-vyleceni-umrti.json&quot;.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        response_: status of the resource call, and data</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">_get_resource</span><span class="p">(</span><span class="n">resource</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="get_epidemiologic_situation_overview"><a class="viewcode-back" href="../../../source/covid19_api.src.html#covid19_api.src.api.get_epidemiologic_situation_overview">[docs]</a><span class="k">def</span> <span class="nf">get_epidemiologic_situation_overview</span><span class="p">(</span>
+    <span class="n">resource</span><span class="o">=</span><span class="s2">&quot;/kraj-okres-nakazeni-vyleceni-umrti.json&quot;</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">response_</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Returns `dict` with overview data per each Region Hygienic Authority (KHS).</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        resource (str, optional): API resource string. Defaults to &quot;/kraj-okres-nakazeni-vyleceni-umrti.json&quot;.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        response_: status of the resource call, and data</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">_get_resource</span><span class="p">(</span><span class="n">resource</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="get_cured_overview"><a class="viewcode-back" href="../../../source/covid19_api.src.html#covid19_api.src.api.get_cured_overview">[docs]</a><span class="k">def</span> <span class="nf">get_cured_overview</span><span class="p">(</span><span class="n">resource</span><span class="o">=</span><span class="s2">&quot;/vyleceni.json&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">response_</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Returns `dict` with data about each cured patient.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        resource (str, optional): API resource string. Defaults to &quot;/vyleceni.json&quot;.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        response_: status of the resource call, and data</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">_get_resource</span><span class="p">(</span><span class="n">resource</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="get_deaths_overview"><a class="viewcode-back" href="../../../source/covid19_api.src.html#covid19_api.src.api.get_deaths_overview">[docs]</a><span class="k">def</span> <span class="nf">get_deaths_overview</span><span class="p">(</span><span class="n">resource</span><span class="o">=</span><span class="s2">&quot;/umrti.json&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">response_</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Returns `dict` with data about each death of the patients.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        resource (str, optional): API resource string. Defaults to &quot;/umrti.json&quot;.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        response_: status of the resource call, and data</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">_get_resource</span><span class="p">(</span><span class="n">resource</span><span class="p">)</span></div>
+</pre></div>
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">czech-covid19-data-api 1.0.4 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">covid19_api.src.api</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2020, Radek &#39;bednaJedna&#39; Bednarik.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.2.1.
+    </div>
+  </body>
+</html>
