@@ -5,7 +5,7 @@ with open("README.md", mode="r") as file:
 
 setup(
     name="czech-covid19-data-api",
-    version="1.0.4",
+    version="1.0.5",
     author="Radek 'bednaJedna' Bednarik",
     packages=find_packages(),
     install_requires=["requests"],
